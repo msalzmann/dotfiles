@@ -1,22 +1,14 @@
 #!/usr/bin/env bash
+#
+# Run all dotfiles installers.
 
-cd ~
-# Link in files, replacing whatever's already there.
-ln -fs ".dotfiles/bash/bashrc"                "${HOME}/.bashrc"
-ln -fs ".dotfiles/bash/bash_profile"          "${HOME}/.bash_profile"
-#ln -fs ".dotfiles/bash/bash_logout"          "${HOME}/.bash_logout"
-ln -fs ".dotfiles/git/gitconfig"              "${HOME}/.gitconfig"
-ln -fs ".dotfiles/git/gitmessage"             "${HOME}/.gitmessage"
-ln -fs ".dotfiles/git/gitignore_global"       "${HOME}/.gitignore_global"
-#ln -fs ".dotfiles/readline/inputrc"          "${HOME}/.inputrc"
-ln -fs ".dotfiles/tmux/tmux.conf"             "${HOME}/.tmux.conf"
-ln -fs ".dotfiles/vim/vimrc"                  "${HOME}/.vimrc"
+set -e
 
-# Link in directories, removing whatever's already there first.
-[[ -e "${HOME}/.vim" ]] && rm -r "${HOME}/.vim"
-ln -fs ".dotfiles/vim" "${HOME}/.vim"
-[[ -e "${HOME}/.bash_completion.d" ]] && rm -r "${HOME}/.bash_completion.d"
-ln -fs ".dotfiles/bash/completion.d" "${HOME}/.bash_completion.d"
+cd "$(dirname $0)"
 
-# Finally setup vim plugins and color schemes
-~/.vim/setup_vim_env.sh
+# find the installers and run them iteratively
+#find . -depth 2 -name install.sh | while read installer; do bash -c "${installer}"; done
+find . -depth 2 -name install.sh -exec bash -c {} \;
+
+cd - >/dev/null
+
