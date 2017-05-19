@@ -1,0 +1,9 @@
+#/bin/bash
+
+cd /Users/masalzmann/priv_puppet/puppetenv/ && git pull
+cd /Users/masalzmann/priv_puppet/modules/site/ && git pull
+cd /Users/masalzmann/priv_puppet/modules/boris/ && git pull
+cd /Users/masalzmann/priv_puppet/modules/pgbouncer && git pull
+cd /Users/masalzmann/priv_puppet/modules/tools && git pull
+cd /Users/masalzmann/priv_puppet/modules/pgobserver && git pull
+#cd /Users/masalzmann/priv_puppet/modules/pgobserver_data_collection_helpers && git pull
